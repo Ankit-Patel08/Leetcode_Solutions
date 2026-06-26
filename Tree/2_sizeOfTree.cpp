@@ -8,8 +8,7 @@ link -> https://www.geeksforgeeks.org/problems/size-of-binary-tree/1
 
 
 
-/*
-Definition for Node
+
 struct Node {
     int data;
     struct Node* left;
@@ -20,7 +19,7 @@ struct Node {
         left = right = NULL;
     }
 };
-*/
+
 
 
 // MTHOD 1
