@@ -28,3 +28,44 @@ public:
       return totalWater;
     }
 };
+
+
+
+
+
+
+
+ /* here no need to maintain the left and right max heights in a separate array,
+  we can just maintain two variables to store the max heights from left and right side.
+  This will reduce the space complexity from O(n) to O(1).
+*/
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int leftmax = 0;
+        int rightmax = 0;
+        int totalwater = 0;
+        int l = 0;
+        int r = height.size()-1;
+        while(l < r){   // we will choose to go from the less heigh side to avoid storing extra
+            if(height[l] <= height[r]){             // max heights 
+                if(leftmax > height[l])
+                   totalwater += leftmax-height[l];
+                else 
+                   leftmax = height[l];
+
+              l++;
+            }else{
+                if(rightmax > height[r]){
+                    totalwater += rightmax-height[r];
+                }
+                else{
+                   rightmax = height[r];
+                }
+                r--;
+                }
+            }
+        return totalwater;
+    }
+};
