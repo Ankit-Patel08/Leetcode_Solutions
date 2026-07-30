@@ -32,14 +32,14 @@ class MIN_HEAP {
          
             int right = 2*i+2;
             
-            int largest = left;
-           if(right < h.size() && h[right] > h[left])
-                int largest = right;    
+            int smallest = left;
+           if(right < h.size() && h[right] < h[left])
+                 smallest = right;    
                 
-           if(h[i] >= h[largest]) break;;
+           if(h[i] <= h[smallest]) break;;
 
-           swap(h[i], h[largest]);
-           i = largest;     
+           swap(h[i], h[smallest]);
+           i = smallest;     
     }
     }
     void print(){
