@@ -12,7 +12,7 @@ class MIN_HEAP {
         while(child > 0 && h[(child-1)/2] > h[child] ){
             swap(h[(child-1)/2], h[child]);
             child = (child-1)/2;
-        }
+        } 
     }
 
     // In the poping  -> we will first remove the first element and replce that with the last element of he heap array
