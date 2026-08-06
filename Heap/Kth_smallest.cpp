@@ -1,6 +1,10 @@
 
-//method 1 -> by sorting 
+// link ->  https://www.geeksforgeeks.org/problems/kth-smallest-element5635/1
+// link -> https://leetcode.com/problems/kth-largest-element-in-an-array/description/ 
+// link -> https://www.geeksforgeeks.org/problems/kth-largest-element-in-a-stream2220/1
 
+//method 1 -> by sorting 
+ 
 //method 2 ->  
 /*
 step-1 ->  first insert the k element in the max priority queue 
@@ -37,4 +41,38 @@ class Solution {
         }
         return maxHeap.top();
     }
+};
+
+
+
+// for the stream of array 
+
+class Solution {
+  public:
+    vector<int> kthLargest(vector<int>& arr, int k) {
+        // code here
+        int n = arr.size();
+        int count = 0;
+        priority_queue<int, vector<int>, greater<int>>minHeap;
+        vector<int>ans(n);
+        
+        while(count < k){
+            minHeap.push(arr[count]);
+            ans[count] = -1;
+            count++;
+        }
+        
+        ans[k-1] = minHeap.top();
+        
+        for(int i = k; i<n; i++){
+            
+            if(arr[i] > minHeap.top()){
+                minHeap.pop();
+                minHeap.push(arr[i]);
+            }
+                ans[i] = minHeap.top();
+        }
+        return ans;
+    }
+    
 };
