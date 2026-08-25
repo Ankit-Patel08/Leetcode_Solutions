@@ -142,6 +142,27 @@ public:
 
 
 
+// TABULATION (BOTTOM UP)
+class Solution {
+public:
+    int frogJump(vector<int>& heights, int k) {
+        int n = heights.size();
+        vector<int>dp(n);
+
+        dp[0] = 0;
+        int mini = INT_MAX;
+        for(int i = 1; i < n; i++){
+            int mini = INT_MAX;
+             for(int j = i-1; j >= max(0, i-k); j--){
+                mini = min(mini, dp[j] + abs(heights[i]-heights[j]));
+             }
+             dp[i] = mini;
+        }
+        return dp[n-1];
+    }
+};
+
+
 
 
 
