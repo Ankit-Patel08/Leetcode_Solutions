@@ -32,3 +32,29 @@ public:
 
     }
 };
+
+
+// Bottom up aaproach  
+   
+
+class Solution {
+
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>dp(n,-1);
+
+        if(n == 1) return nums[0];
+
+        dp[0] = nums[0];
+        dp[1] = max(nums[1], nums[0]);
+        for(int i = 2; i<n; i++){
+            
+            int taking = nums[i]+dp[i-2];
+            int notTaking = dp[i-1];
+
+            dp[i] = max(taking , notTaking);
+        }
+        return dp[n-1];
+    }
+};
