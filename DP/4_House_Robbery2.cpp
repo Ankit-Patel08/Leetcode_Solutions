@@ -46,3 +46,38 @@ public:
         return max(takingFirstElement, notTakingFirstElement);
     }
 };
+
+
+
+// Done without breaking the nums in two array instead passing the index start and end
+class Solution {
+    int maxRob(vector<int>&nums, int start, int end){
+        int n = nums.size();
+        int taking = nums[start];
+        
+        if(start == end) return nums[start];
+
+        int notTaking = max(nums[start], nums[start+1]);
+
+        for(int i = start+2; i<=end; i++){
+            int curr = max(nums[i]+taking, notTaking);
+            
+            taking = notTaking;
+            notTaking = curr;
+        }
+        return notTaking;
+    }
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        if(n == 1) return nums[0];
+        if(n == 2) return max(nums[0], nums[1]);
+
+
+        int takingFirstElement = maxRob(nums, 0, n-2);
+        int notTakingFirstElement  = maxRob(nums, 1, n-1);
+
+        return max(takingFirstElement, notTakingFirstElement);
+    }
+};
