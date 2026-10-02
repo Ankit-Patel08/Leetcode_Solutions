@@ -45,6 +45,8 @@ int main() {
 
 
 
+
+// Revise 
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -68,3 +70,25 @@ public:
         return longestSubsLength;
     }
 };
+
+
+
+// clean code
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char>unique;
+        int left = 0;
+        int longestSubsLength = 0;
+        int right = 0;
+        for(; right < s.length(); right++){
+                while(unique.count(s[right])){
+                    unique.erase(s[left]);
+                    left++;
+                }
+                unique.insert(s[right]);
+            longestSubsLength = max(longestSubsLength, (right-left+1));
+        }
+        return longestSubsLength;
+    }
+}; 
