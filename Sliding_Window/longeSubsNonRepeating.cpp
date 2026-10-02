@@ -41,3 +41,30 @@ int main() {
     cout << sol.lengthOfLongestSubstring(s) << endl; // Output: 3
     return 0;
 }
+
+
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char>unique;
+        int left = 0;
+        int longestSubsLength = 0;
+        int right = 0;
+        for(; right < s.length(); right++){
+            
+            if(!unique.count(s[right])){
+                unique.insert(s[right]);
+            }else{
+                while(unique.count(s[right])){
+                    unique.erase(s[left]);
+                    left++;
+                }
+                unique.insert(s[right]);
+            }
+            longestSubsLength = max(longestSubsLength, (right-left+1));
+        }
+        return longestSubsLength;
+    }
+};
