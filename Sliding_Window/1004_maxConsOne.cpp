@@ -20,3 +20,17 @@ public:
        return longestConsecOnes;
     }
 };
+
+
+  // FOLLOW THIS PATTERN FOR SLIDING WINDOW PROBLEMS 
+/*
+Add right
+   ↓
+Did adding it make window invalid?
+   ↓
+YES → shrink from left
+   ↓
+Window is valid
+   ↓
+Calculate length
+*/
