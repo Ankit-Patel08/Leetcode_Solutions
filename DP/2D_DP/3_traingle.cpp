@@ -3,6 +3,11 @@ link -> https://leetcode.com/problems/triangle/description/
             Triangle (Leetcode Qno. -> 120)    
 */
 
+/*
+1. learning it given -> if we have variable starting or ending and one fixed starting or ending elements  then start from the fixed one 
+2. if we have elements both in negative and positive then better not to give the dp starting as -1, use a visited array to check if the value is already calculated or not
+*/
+
 
 class Solution {
 private:
