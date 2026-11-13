@@ -65,3 +65,23 @@ public:
         return dp[0][1];
     }
 };
+
+//SPACE OPTIMISED
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int prevBuy = 0;
+        int prevSell = 0;
+        int currBuy = 0;
+        int currSell = 0;
+        for(int i = n-1; i>=0; i--){
+            currBuy = max(-prices[i]+prevSell, prevBuy);
+            currSell =max( prices[i]+prevBuy, prevSell);
+
+            prevBuy = currBuy;
+            prevSell = currSell;
+        }
+        return currBuy;
+    }
+};
