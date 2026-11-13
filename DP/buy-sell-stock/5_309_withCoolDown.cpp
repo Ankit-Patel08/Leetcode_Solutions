@@ -54,3 +54,26 @@ public:
         return dp[0][1];
     }
 };  
+
+// Space Optimization
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int nextBuy = 0;
+        int next2Buy = 0;
+        int nextSell = 0;
+        int currBuy = 0;
+        int currSell = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            currBuy = max(-prices[i] + nextSell, nextBuy);
+            currSell = max(prices[i] + next2Buy, nextSell);
+
+            next2Buy = nextBuy; // storing the 2 previous
+
+            nextBuy = currBuy;
+            nextSell = currSell;
+        }
+        return currBuy;
+    }
+};
