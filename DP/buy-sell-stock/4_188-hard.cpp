@@ -1,0 +1,35 @@
+/*
+link -> https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+*/
+
+//  Recursion + Memoization
+class Solution {
+    private:
+    int maxBenefit(vector<vector<vector<int>>>&dp, vector<int>&prices, int idx, int buy, int remTrans){
+        if(idx == prices.size() || remTrans == 0) return 0;
+
+        if(dp[idx][buy][remTrans] != -1) return dp[idx][buy][remTrans];
+
+        int profit = 0;
+        if(buy){
+            profit = max(
+                (-prices[idx] + maxBenefit(dp, prices, idx+1, 0, remTrans)),
+                (0 +  maxBenefit(dp, prices, idx+1, 1, remTrans))
+            );
+        }else{
+             profit = max(
+                (prices[idx] + maxBenefit(dp, prices, idx+1, 1, remTrans-1)),
+                (0 +  maxBenefit(dp, prices, idx+1, 0, remTrans))
+            );
+        }
+        return dp[idx][buy][remTrans] = profit;
+    }
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+
+        vector<vector<vector<int>>>dp(n,vector<vector<int>>(2, vector<int>(k+1, -1)));
+
+        return maxBenefit(dp, prices, 0, 1, k);
+    }
+};
