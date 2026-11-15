@@ -22,3 +22,30 @@ class Solution {
         return isthereSubset(arr, sum, 0);
     }
 };
+
+
+// Dynamic Programming approach  memoization
+
+class Solution {
+    private:
+     bool isthereSubset(vector<int>& arr, int sum, int idx, vector<vector<int>>&dp){
+          if(sum == 0) return true;
+          if(sum < 0 || idx >= arr.size()) return false;
+          
+          if(dp[idx][sum] != -1) return dp[idx][sum];
+          
+          bool take = isthereSubset(arr, sum-arr[idx], idx+1, dp);
+          bool nottake = isthereSubset(arr, sum, idx+1, dp);
+          
+        
+         return dp[idx][sum] = take || nottake;  // take if answer exists in any branch
+      }
+    
+  public:
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        int n = arr.size();
+        vector<vector<int>>dp(n+1, vector<int>(sum+1, -1));
+        return isthereSubset(arr, sum, 0,dp);
+    }
+};
