@@ -12,7 +12,6 @@ class Solution {
           if(isthereSubset(arr, sum-arr[idx], idx+1)) return true;
            
           
-        
         return isthereSubset(arr,sum, idx+1);
       }
     
@@ -47,6 +46,42 @@ class Solution {
         int n = arr.size();
         vector<vector<int>>dp(n+1, vector<int>(sum+1, -1));
         return isthereSubset(arr, sum, 0,dp);
+    }
+};
+
+
+// tabulation (bottom up) approach
+class Solution {
+public:
+    bool isSubsetSum(vector<int>& arr, int sum) {
+
+        int n = arr.size();
+
+        vector<vector<int>> dp(
+            n + 1, vector<int>(sum + 1, 0)
+        );
+
+        for(int i = 0; i <= n; i++) {
+            dp[i][0] = 1;
+        }
+
+        for(int idx = n - 1; idx >= 0; idx--) {
+
+            for(int j = 1; j <= sum; j++) {
+
+                int nottake = dp[idx + 1][j];
+
+                int take = false;
+
+                if(arr[idx] <= j) {
+                    take = dp[idx + 1][j - arr[idx]];
+                }
+
+                dp[idx][j] = take || nottake;
+            }
+        }
+
+        return dp[0][sum];
     }
 };
 
